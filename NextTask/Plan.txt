@@ -1,5 +1,6 @@
 ﻿Plan:
 *Remember to save to github!
+-Switch primary key of Task from guid back to int in db and code.
 -Create a new class called TaskRepository.  It should have all CRUD operations on it.  
    Create:
      -Create to TaskSet
@@ -12,9 +13,7 @@
 	 -Delete from db
    Select:
      -Load data from db to TaskSet
--Need to write some code on persisting all the data to the database.
--Need to write some code on loading all the data from the db
--Delete scenario
--Update scenario
--I want updates to happen immediately.  There shouldn't be a big update when the user closes
- the app.  
+-What if you created a new table called TaskSet that just contains a comma separated list of task ids.
+The order of the task ids would determine the queue order.  Then persisting the queue ordering would
+just be a matter of transversing through the queue and getting all ids.  
+  
