@@ -1,0 +1,19 @@
+﻿Plan:
+-Create a new class called TaskRepository.  It should have all CRUD operations on it.  
+   Create:
+     -Create to TaskSet
+	 -Insert into db
+   Update:
+     -Update to TaskSet
+	 -Update db
+   Delete:
+     -Delete from TaskSet
+	 -Delete from db
+   Select:
+     -Load data from db to TaskSet
+-Need to write some code on persisting all the data to the database.
+-Need to write some code on loading all the data from the db
+-Delete scenario
+-Update scenario
+-I want updates to happen immediately.  There shouldn't be a big update when the user closes
+ the app.  
