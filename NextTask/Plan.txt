@@ -1,4 +1,5 @@
 ﻿Plan:
+*Remember to save to github!
 -Create a new class called TaskRepository.  It should have all CRUD operations on it.  
    Create:
      -Create to TaskSet
