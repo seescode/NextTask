@@ -34,6 +34,8 @@ namespace NextTask
                 t.description = this.description.Text;
                 t.notes = this.notes.Text;
                 _taskSet._tasksNotDone.AddLast(t);
+                TaskRepository.InsertTask(t);
+                 
                 Clear();
             }
         }
@@ -52,6 +54,7 @@ namespace NextTask
                     t.description = this.description.Text;
                     t.notes = this.notes.Text;                    
                     _taskSet._tasksNotDone.AddAfter(_taskSet._currentTask, t);
+                    TaskRepository.InsertTask(t);
                     Clear();
                 }
             }
@@ -65,6 +68,8 @@ namespace NextTask
                 t.description = this.description.Text;
                 t.notes = this.notes.Text;                
                 _taskSet._tasksNotDone.AddFirst(t);
+                TaskRepository.InsertTask(t);
+                 
                 Clear();
             }
         }
