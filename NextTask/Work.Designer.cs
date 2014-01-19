@@ -95,7 +95,7 @@
             this.notes.Multiline = true;
             this.notes.Name = "notes";
             this.notes.Size = new System.Drawing.Size(450, 212);
-            this.notes.TabIndex = 11;
+            this.notes.TabIndex = 1;
             // 
             // description
             // 
@@ -104,7 +104,7 @@
             this.description.Multiline = true;
             this.description.Name = "description";
             this.description.Size = new System.Drawing.Size(450, 68);
-            this.description.TabIndex = 10;
+            this.description.TabIndex = 0;
             // 
             // finished
             // 

@@ -49,7 +49,7 @@
             this.addFront.Location = new System.Drawing.Point(15, 317);
             this.addFront.Name = "addFront";
             this.addFront.Size = new System.Drawing.Size(75, 23);
-            this.addFront.TabIndex = 1;
+            this.addFront.TabIndex = 2;
             this.addFront.Text = "Add Front";
             this.addFront.UseVisualStyleBackColor = true;
             this.addFront.Click += new System.EventHandler(this.addFront_Click);
@@ -59,7 +59,7 @@
             this.addNext.Location = new System.Drawing.Point(96, 317);
             this.addNext.Name = "addNext";
             this.addNext.Size = new System.Drawing.Size(75, 23);
-            this.addNext.TabIndex = 2;
+            this.addNext.TabIndex = 3;
             this.addNext.Text = "Add Next";
             this.addNext.UseVisualStyleBackColor = true;
             this.addNext.Click += new System.EventHandler(this.addNext_Click);
@@ -69,7 +69,7 @@
             this.addBack.Location = new System.Drawing.Point(177, 317);
             this.addBack.Name = "addBack";
             this.addBack.Size = new System.Drawing.Size(75, 23);
-            this.addBack.TabIndex = 3;
+            this.addBack.TabIndex = 4;
             this.addBack.Text = "Add Back";
             this.addBack.UseVisualStyleBackColor = true;
             this.addBack.Click += new System.EventHandler(this.addBack_Click);
@@ -81,7 +81,7 @@
             this.notes.Multiline = true;
             this.notes.Name = "notes";
             this.notes.Size = new System.Drawing.Size(450, 212);
-            this.notes.TabIndex = 4;
+            this.notes.TabIndex = 1;
             // 
             // NewTask
             // 
