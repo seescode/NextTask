@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Data.SqlClient;
 using System.Data.SqlServerCe;
+using System.Data;
+using Dapper;
 
 namespace NextTask.Data
 {
@@ -18,22 +20,20 @@ namespace NextTask.Data
         {
             try
             {
-                using (SqlCeConnection connection = GetConnection())
+                using (IDbConnection connection = GetConnection())
                 {
-                    string queryString = String.Format(@"Insert into Task (description, notes, Created, TimeSpentInSeconds)
-                                values ('{0}', '{1}', '{2}', '{3}')", t.description, t.notes, 
-                                t.Created.ToShortDateString().Replace('/', '-'), 
-                                t.TimeSpentInSeconds);
+                    var sql = "Insert into Task (description, notes, Created, TimeSpentInSeconds) values (@description, @notes, @Created, @TimeSpentInSeconds)";
+                              //"Select cast(scope_identity() as int)";
 
-                    SqlCeCommand command = new SqlCeCommand(queryString, connection);
-                    command.Connection.Open();
-                    command.ExecuteNonQuery();
+                    connection.Execute(sql, t);
+                    //var id = connection.Query<int>(sql, t).SingleOrDefault();
+                    //t.id = id;
                 }
             }
             catch
             {
                 Console.WriteLine("Insert Task failed");
-                throw;
+                throw;    
             }
         }
 

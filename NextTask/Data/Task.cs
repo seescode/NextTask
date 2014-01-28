@@ -7,7 +7,7 @@ namespace NextTask.Data
 {
     public partial class Task
     {
-        public Guid id { get; set; }
+        public int id { get; set; }
         public string description { get; set; } 
         public string notes { get; set; }
         public DateTime Created { get; set; }
@@ -39,7 +39,7 @@ namespace NextTask.Data
 
         public Task()
         {
-            id = new Guid();
+            id = -1;
             description = "";
             notes = "";           
             TimeSpentInSeconds = 0;
