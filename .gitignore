@@ -61,6 +61,7 @@ build/
 *.obj
 *.pch
 *.pgc
+*.pdb
 *.pgd
 *.rsp
 *.sbr
@@ -82,7 +83,6 @@ ipch/
 *.aps
 *.ncb
 *.opensdf
-*.sdf
 *.cachefile
 
 # Visual Studio profiler
