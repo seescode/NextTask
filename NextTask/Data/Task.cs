@@ -11,7 +11,7 @@ namespace NextTask.Data
         public string description { get; set; } 
         public string notes { get; set; }
         public DateTime Created { get; set; }
-        public DateTime Completed { get; set; }
+        public DateTime? Completed { get; set; }
         public long TimeSpentInSeconds { get; set; }
 
         static public string GetFormattedTime(long timeSpendInSeconds)

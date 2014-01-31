@@ -12,8 +12,26 @@ namespace NextTask.Data
     public static class TaskRepository
     {
         
-        public static void LoadTasks()
+        public static IEnumerable<Task> LoadTasks()
         {
+            IEnumerable<Task> tasks;
+
+            try
+            {
+                using (IDbConnection connection = GetConnection())
+                {
+                    var sql = "select id, description, notes, Created, Completed, TimeSpentInSeconds from Task";
+
+                     tasks = connection.Query<Task>(sql);
+                }
+            }
+            catch
+            {
+                Console.WriteLine("Load Tasks failed");
+                throw;
+            }
+
+            return tasks;
         }
 
         public static void InsertTask(Task t)
@@ -22,12 +40,13 @@ namespace NextTask.Data
             {
                 using (IDbConnection connection = GetConnection())
                 {
-                    var sql = "Insert into Task (description, notes, Created, TimeSpentInSeconds) values (@description, @notes, @Created, @TimeSpentInSeconds)";
-                              //"Select cast(scope_identity() as int)";
-
+                    var sql = @"Insert into Task (description, notes, Created, TimeSpentInSeconds) values (@description, @notes, @Created, @TimeSpentInSeconds);";
                     connection.Execute(sql, t);
-                    //var id = connection.Query<int>(sql, t).SingleOrDefault();
-                    //t.id = id;
+
+                    sql = "SELECT top(1) id from Task order by id desc";
+                    var id = connection.Query<int>(sql).Single();
+
+                    t.id = id;
                 }
             }
             catch
@@ -39,12 +58,21 @@ namespace NextTask.Data
 
         public static void UpdateTask(Task t)
         {
+            try
+            {
+                using (IDbConnection connection = GetConnection())
+                {
+                    var sql = "Update Task set description=@description, notes=@notes, Created=@Created, TimeSpentInSeconds=@TimeSpentInSeconds, Completed=@Completed " +
+                        "where id=@id";
 
-        }
-
-        public static void DeleteTask(int id)
-        {
-
+                    connection.Execute(sql, t);
+                }
+            }
+            catch
+            {
+                Console.WriteLine("Update Task failed");
+                throw;
+            }
         }
 
         public static SqlCeConnection GetConnection()

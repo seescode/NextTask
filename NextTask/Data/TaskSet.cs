@@ -20,13 +20,19 @@ namespace NextTask.Data
             _tasksNotDone = new LinkedList<Task>();
         }
 
+        protected TaskSet(IEnumerable<Task> tasks)
+        {
+            _tasksDone = new LinkedList<Task>(tasks.Where(n => n.Completed != null));
+            _tasksNotDone = new LinkedList<Task>(tasks.Where(n => n.Completed == null));
+        }
+
         public static TaskSet Instance()
         {
             // Uses lazy initialization.
             // Note: this is not thread safe.
             if (_instance == null)
             {
-                _instance = new TaskSet();
+                _instance = new TaskSet(TaskRepository.LoadTasks());
             }
 
             return _instance;

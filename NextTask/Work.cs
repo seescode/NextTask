@@ -19,7 +19,7 @@ namespace NextTask
         public Work()
         {
             InitializeComponent();
-
+         
             if (_taskSet._tasksNotDone.Count > 0)
             {
                 _taskSet._currentTask = _taskSet._currentTask ?? _taskSet._tasksNotDone.First;
@@ -88,6 +88,7 @@ namespace NextTask
         {
             SaveElapsedTime();
 
+            _taskSet._currentTask.Value.Completed = DateTime.Now;
             update_Click(sender, e);
 
             Task clonedTask = new Task();
@@ -128,6 +129,7 @@ namespace NextTask
         {
             _taskSet._currentTask.Value.description = description.Text;
             _taskSet._currentTask.Value.notes = notes.Text;
+            TaskRepository.UpdateTask(_taskSet._currentTask.Value);
         }
 
         protected override void OnClosed(EventArgs e)
