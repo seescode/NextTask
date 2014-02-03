@@ -33,12 +33,13 @@
             this.addNext = new System.Windows.Forms.Button();
             this.addBack = new System.Windows.Forms.Button();
             this.notes = new System.Windows.Forms.TextBox();
+            this.projects = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // description
             // 
             this.description.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.description.Location = new System.Drawing.Point(15, 25);
+            this.description.Location = new System.Drawing.Point(15, 47);
             this.description.Multiline = true;
             this.description.Name = "description";
             this.description.Size = new System.Drawing.Size(450, 68);
@@ -77,17 +78,26 @@
             // notes
             // 
             this.notes.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.notes.Location = new System.Drawing.Point(15, 99);
+            this.notes.Location = new System.Drawing.Point(15, 121);
             this.notes.Multiline = true;
             this.notes.Name = "notes";
-            this.notes.Size = new System.Drawing.Size(450, 212);
+            this.notes.Size = new System.Drawing.Size(450, 190);
             this.notes.TabIndex = 1;
+            // 
+            // projects
+            // 
+            this.projects.FormattingEnabled = true;
+            this.projects.Location = new System.Drawing.Point(177, 12);
+            this.projects.Name = "projects";
+            this.projects.Size = new System.Drawing.Size(288, 21);
+            this.projects.TabIndex = 5;
             // 
             // NewTask
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(484, 361);
+            this.Controls.Add(this.projects);
             this.Controls.Add(this.notes);
             this.Controls.Add(this.addBack);
             this.Controls.Add(this.addNext);
@@ -107,5 +117,6 @@
         private System.Windows.Forms.Button addNext;
         private System.Windows.Forms.Button addBack;
         private System.Windows.Forms.TextBox notes;
+        private System.Windows.Forms.ComboBox projects;
     }
 }
