@@ -16,6 +16,12 @@ namespace NextTask
             InitializeComponent();
         }
 
+        protected override void OnFormClosed(FormClosedEventArgs e)
+        {
+            this.Owner.Enabled = true;
+            base.OnFormClosed(e);
+        }
+
         private void addProject_Click(object sender, EventArgs e)
         {
 

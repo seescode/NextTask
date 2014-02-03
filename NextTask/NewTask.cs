@@ -79,5 +79,14 @@ namespace NextTask
             description.Text = "";
             notes.Text = "";
         }
+
+        private void newProject_Click(object sender, EventArgs e)
+        {
+            this.Enabled = false;
+
+            NewProject form = new NewProject();
+            form.Show();
+            form.Owner = this;
+        }
     }
 }

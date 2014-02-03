@@ -91,16 +91,17 @@
             this.projects.Location = new System.Drawing.Point(177, 12);
             this.projects.Name = "projects";
             this.projects.Size = new System.Drawing.Size(288, 21);
-            this.projects.TabIndex = 5;
+            this.projects.TabIndex = 6;
             // 
             // newProject
             // 
             this.newProject.Location = new System.Drawing.Point(390, 317);
             this.newProject.Name = "newProject";
             this.newProject.Size = new System.Drawing.Size(75, 23);
-            this.newProject.TabIndex = 6;
+            this.newProject.TabIndex = 5;
             this.newProject.Text = "New Project";
             this.newProject.UseVisualStyleBackColor = true;
+            this.newProject.Click += new System.EventHandler(this.newProject_Click);
             // 
             // NewTask
             // 
