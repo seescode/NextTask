@@ -34,6 +34,7 @@
             this.addBack = new System.Windows.Forms.Button();
             this.notes = new System.Windows.Forms.TextBox();
             this.projects = new System.Windows.Forms.ComboBox();
+            this.newProject = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // description
@@ -92,11 +93,21 @@
             this.projects.Size = new System.Drawing.Size(288, 21);
             this.projects.TabIndex = 5;
             // 
+            // newProject
+            // 
+            this.newProject.Location = new System.Drawing.Point(390, 317);
+            this.newProject.Name = "newProject";
+            this.newProject.Size = new System.Drawing.Size(75, 23);
+            this.newProject.TabIndex = 6;
+            this.newProject.Text = "New Project";
+            this.newProject.UseVisualStyleBackColor = true;
+            // 
             // NewTask
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(484, 361);
+            this.Controls.Add(this.newProject);
             this.Controls.Add(this.projects);
             this.Controls.Add(this.notes);
             this.Controls.Add(this.addBack);
@@ -118,5 +129,6 @@
         private System.Windows.Forms.Button addBack;
         private System.Windows.Forms.TextBox notes;
         private System.Windows.Forms.ComboBox projects;
+        private System.Windows.Forms.Button newProject;
     }
 }
