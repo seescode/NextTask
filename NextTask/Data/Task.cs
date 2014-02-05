@@ -13,6 +13,7 @@ namespace NextTask.Data
         public DateTime Created { get; set; }
         public DateTime? Completed { get; set; }
         public long TimeSpentInSeconds { get; set; }
+        public int projectId { get; set; }
 
         static public string GetFormattedTime(long timeSpendInSeconds)
         {
@@ -44,6 +45,7 @@ namespace NextTask.Data
             notes = "";           
             TimeSpentInSeconds = 0;
             Created = DateTime.Now;
+            projectId = -1;
         }
 
 

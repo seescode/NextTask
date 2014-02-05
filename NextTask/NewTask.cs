@@ -19,6 +19,21 @@ namespace NextTask
             InitializeComponent();
         }
 
+        protected override void OnEnabledChanged(EventArgs e)
+        {
+            LoadProjectsDropDown();
+
+            base.OnEnabledChanged(e);
+        }
+
+        protected void LoadProjectsDropDown()
+        {
+            projects.DataSource = null;
+            projects.DataSource = _taskSet._projects;
+            projects.DisplayMember = "name";
+            projects.ValueMember = "projectId";            
+        }
+
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
             this.Owner.Enabled = true;

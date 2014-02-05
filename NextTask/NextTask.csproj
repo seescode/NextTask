@@ -68,6 +68,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\Project.cs" />
+    <Compile Include="Data\ProjectRepository.cs" />
     <Compile Include="Data\Task.cs" />
     <Compile Include="Data\TaskRepository.cs" />
     <Compile Include="Data\TaskSet.cs" />

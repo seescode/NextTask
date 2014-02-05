@@ -14,16 +14,20 @@ namespace NextTask.Data
 
         public LinkedListNode<Task> _currentTask { get; set; }
 
+        public List<Project> _projects { get; set; }
+
         protected TaskSet()
         {
             _tasksDone = new LinkedList<Task>();
             _tasksNotDone = new LinkedList<Task>();
+            _projects = new List<Project>();
         }
 
-        protected TaskSet(IEnumerable<Task> tasks)
+        protected TaskSet(IEnumerable<Task> tasks, IEnumerable<Project> projects)
         {
             _tasksDone = new LinkedList<Task>(tasks.Where(n => n.Completed != null));
             _tasksNotDone = new LinkedList<Task>(tasks.Where(n => n.Completed == null));
+            _projects = projects.ToList<Project>();
         }
 
         public static TaskSet Instance()
@@ -32,7 +36,7 @@ namespace NextTask.Data
             // Note: this is not thread safe.
             if (_instance == null)
             {
-                _instance = new TaskSet(TaskRepository.LoadTasks());
+                _instance = new TaskSet(TaskRepository.LoadTasks(), ProjectRepository.LoadProjects());
             }
 
             return _instance;
