@@ -11,12 +11,18 @@ using NextTask.Data;
 namespace NextTask
 {
     public partial class NewTask : Form
-    {
+    {       
         TaskSet _taskSet = TaskSet.Instance();
 
         public NewTask()
         {
             InitializeComponent();
+            LoadProjectsDropDown();
+        }
+
+        public void SetProjectId(int projectId)
+        {
+            projects.SelectedIndex = projectId;
         }
 
         protected override void OnEnabledChanged(EventArgs e)
@@ -43,11 +49,12 @@ namespace NextTask
         private void addBack_Click(object sender, EventArgs e)
         {
 
-            if (this.description.Text.Trim() != "")
+            if (this.description.Text.Trim() != "" && projects.SelectedItem != null)
             {
                 Task t = new Task();
                 t.description = this.description.Text;
                 t.notes = this.notes.Text;
+                t.projectId = Int32.Parse(projects.SelectedValue.ToString());
                 _taskSet._tasksNotDone.AddLast(t);
                 TaskRepository.InsertTask(t);
                  
@@ -57,7 +64,7 @@ namespace NextTask
 
         private void addNext_Click(object sender, EventArgs e)
         {
-            if (this.description.Text.Trim() != "")
+            if (this.description.Text.Trim() != "" && projects.SelectedItem != null)
             {
                 if (_taskSet._currentTask == null)
                 {
@@ -67,7 +74,8 @@ namespace NextTask
                 {
                     Task t = new Task();
                     t.description = this.description.Text;
-                    t.notes = this.notes.Text;                    
+                    t.notes = this.notes.Text;
+                    t.projectId = Int32.Parse(projects.SelectedValue.ToString());
                     _taskSet._tasksNotDone.AddAfter(_taskSet._currentTask, t);
                     TaskRepository.InsertTask(t);
                     Clear();
@@ -77,11 +85,12 @@ namespace NextTask
 
         private void addFront_Click(object sender, EventArgs e)
         {
-            if (this.description.Text.Trim() != "")
+            if (this.description.Text.Trim() != "" && projects.SelectedItem != null)
             {
                 Task t = new Task();
                 t.description = this.description.Text;
-                t.notes = this.notes.Text;                
+                t.notes = this.notes.Text;
+                t.projectId = Int32.Parse(projects.SelectedValue.ToString());
                 _taskSet._tasksNotDone.AddFirst(t);
                 TaskRepository.InsertTask(t);
                  

@@ -10,7 +10,9 @@ namespace NextTask.Data
         public static IEnumerable<Project> LoadProjects()
         {
             //[FIX] this is just a stub that needs to be implemented.
-            return new List<Project>();
+            List<Project> p = new List<Project>();
+            p.Add(new Project() { name = "Main", projectId = 1 });
+            return p;
         }
     }
 }

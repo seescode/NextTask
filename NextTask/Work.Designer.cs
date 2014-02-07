@@ -36,6 +36,7 @@
             this.notes = new System.Windows.Forms.TextBox();
             this.description = new System.Windows.Forms.TextBox();
             this.finished = new System.Windows.Forms.Label();
+            this.projects = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // skip
@@ -91,37 +92,48 @@
             // notes
             // 
             this.notes.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.notes.Location = new System.Drawing.Point(17, 87);
+            this.notes.Location = new System.Drawing.Point(17, 109);
             this.notes.Multiline = true;
             this.notes.Name = "notes";
-            this.notes.Size = new System.Drawing.Size(450, 212);
+            this.notes.Size = new System.Drawing.Size(450, 211);
             this.notes.TabIndex = 1;
             // 
             // description
             // 
             this.description.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.description.Location = new System.Drawing.Point(17, 13);
+            this.description.Location = new System.Drawing.Point(17, 39);
             this.description.Multiline = true;
             this.description.Name = "description";
-            this.description.Size = new System.Drawing.Size(450, 68);
+            this.description.Size = new System.Drawing.Size(450, 64);
             this.description.TabIndex = 0;
             // 
             // finished
             // 
             this.finished.AutoSize = true;
             this.finished.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.finished.Location = new System.Drawing.Point(82, 66);
+            this.finished.Location = new System.Drawing.Point(172, 66);
             this.finished.Name = "finished";
-            this.finished.Size = new System.Drawing.Size(320, 37);
+            this.finished.Size = new System.Drawing.Size(154, 37);
             this.finished.TabIndex = 12;
-            this.finished.Text = "All Tasks Completed!";
+            this.finished.Text = "No Tasks";
             this.finished.Visible = false;
+            // 
+            // projects
+            // 
+            this.projects.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.projects.FormattingEnabled = true;
+            this.projects.Location = new System.Drawing.Point(179, 12);
+            this.projects.Name = "projects";
+            this.projects.Size = new System.Drawing.Size(288, 21);
+            this.projects.TabIndex = 13;
+            this.projects.SelectedIndexChanged += new System.EventHandler(this.projects_SelectedIndexChanged);
             // 
             // Work
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(484, 361);
+            this.Controls.Add(this.projects);
             this.Controls.Add(this.finished);
             this.Controls.Add(this.notes);
             this.Controls.Add(this.description);
@@ -147,6 +159,7 @@
         private System.Windows.Forms.TextBox notes;
         private System.Windows.Forms.TextBox description;
         private System.Windows.Forms.Label finished;
+        private System.Windows.Forms.ComboBox projects;
     }
 }
 

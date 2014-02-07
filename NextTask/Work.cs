@@ -66,6 +66,16 @@ namespace NextTask
 
             description.Text = _taskSet._currentTask.Value.description;
             notes.Text = _taskSet._currentTask.Value.notes;
+            LoadProjectsDropDown();
+        }
+
+        protected void LoadProjectsDropDown()
+        {
+            projects.DataSource = null;
+            //projects.DataSource = _taskSet._projects.Where(n => _taskSet._tasksNotDone.Select(k => k.projectId == n.projectId).Count() > 0).ToList();
+            projects.DataSource = _taskSet._projects;
+            projects.DisplayMember = "name";
+            projects.ValueMember = "projectId";
         }
 
         private void skip_Click(object sender, EventArgs e)
@@ -145,6 +155,7 @@ namespace NextTask
             this.Enabled = false;
 
             NewTask form = new NewTask();
+            form.SetProjectId(projects.SelectedIndex);
             form.Show();
             form.Owner = this;
         }
@@ -167,6 +178,11 @@ namespace NextTask
             }
             _stopwatch.Stop();
             _stopwatch.Reset();
+        }
+
+        private void projects_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

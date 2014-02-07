@@ -87,6 +87,7 @@
             // 
             // projects
             // 
+            this.projects.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.projects.FormattingEnabled = true;
             this.projects.Location = new System.Drawing.Point(177, 12);
             this.projects.Name = "projects";
