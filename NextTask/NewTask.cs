@@ -12,7 +12,7 @@ namespace NextTask
 {
     public partial class NewTask : Form
     {       
-        TaskSet _taskSet = TaskSet.Instance();
+        TaskService _taskService = TaskService.Instance();
 
         public NewTask()
         {
@@ -35,7 +35,7 @@ namespace NextTask
         protected void LoadProjectsDropDown()
         {
             projects.DataSource = null;
-            projects.DataSource = _taskSet._projects;
+            projects.DataSource = _taskService._projects;
             projects.DisplayMember = "name";
             projects.ValueMember = "projectId";            
         }
@@ -55,7 +55,7 @@ namespace NextTask
                 t.description = this.description.Text;
                 t.notes = this.notes.Text;
                 t.projectId = Int32.Parse(projects.SelectedValue.ToString());
-                _taskSet._tasksNotDone.AddLast(t);
+                _taskService._tasksNotDone.AddLast(t);
                 TaskRepository.InsertTask(t);
                  
                 Clear();
@@ -66,7 +66,7 @@ namespace NextTask
         {
             if (this.description.Text.Trim() != "" && projects.SelectedItem != null)
             {
-                if (_taskSet._currentTask == null)
+                if (_taskService._currentTask == null)
                 {
                     addBack_Click(sender, e);
                 }
@@ -76,7 +76,7 @@ namespace NextTask
                     t.description = this.description.Text;
                     t.notes = this.notes.Text;
                     t.projectId = Int32.Parse(projects.SelectedValue.ToString());
-                    _taskSet._tasksNotDone.AddAfter(_taskSet._currentTask, t);
+                    _taskService._tasksNotDone.AddAfter(_taskService._currentTask, t);
                     TaskRepository.InsertTask(t);
                     Clear();
                 }
@@ -91,7 +91,7 @@ namespace NextTask
                 t.description = this.description.Text;
                 t.notes = this.notes.Text;
                 t.projectId = Int32.Parse(projects.SelectedValue.ToString());
-                _taskSet._tasksNotDone.AddFirst(t);
+                _taskService._tasksNotDone.AddFirst(t);
                 TaskRepository.InsertTask(t);
                  
                 Clear();

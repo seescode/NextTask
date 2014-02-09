@@ -72,7 +72,7 @@
     <Compile Include="Data\ProjectRepository.cs" />
     <Compile Include="Data\Task.cs" />
     <Compile Include="Data\TaskRepository.cs" />
-    <Compile Include="Data\TaskSet.cs" />
+    <Compile Include="Data\TaskService.cs" />
     <Compile Include="NewProject.cs">
       <SubType>Form</SubType>
     </Compile>

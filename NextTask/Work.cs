@@ -13,16 +13,16 @@ namespace NextTask
 {
     public partial class Work : Form
     {
-        TaskSet _taskSet = TaskSet.Instance();
+        TaskService _taskService = TaskService.Instance();
         Stopwatch _stopwatch = new Stopwatch();
 
         public Work()
         {
             InitializeComponent();
          
-            if (_taskSet._tasksNotDone.Count > 0)
+            if (_taskService._tasksNotDone.Count > 0)
             {
-                _taskSet._currentTask = _taskSet._currentTask ?? _taskSet._tasksNotDone.First;
+                _taskService._currentTask = _taskService._currentTask ?? _taskService._tasksNotDone.First;
                 LoadForm();
             }
             else
@@ -43,9 +43,9 @@ namespace NextTask
 
         protected override void OnEnabledChanged(EventArgs e)
         {
-            if (_taskSet._tasksNotDone.Count > 0)
+            if (_taskService._tasksNotDone.Count > 0)
             {
-                _taskSet._currentTask = _taskSet._currentTask ?? _taskSet._tasksNotDone.First;
+                _taskService._currentTask = _taskService._currentTask ?? _taskService._tasksNotDone.First;
                 LoadForm();
 
                 finished.Visible = false;
@@ -64,16 +64,18 @@ namespace NextTask
             _stopwatch.Reset();
             _stopwatch.Start();
 
-            description.Text = _taskSet._currentTask.Value.description;
-            notes.Text = _taskSet._currentTask.Value.notes;
+            description.Text = _taskService._currentTask.Value.description;
+            notes.Text = _taskService._currentTask.Value.notes;
             LoadProjectsDropDown();
         }
 
         protected void LoadProjectsDropDown()
         {
             projects.DataSource = null;
-            //projects.DataSource = _taskSet._projects.Where(n => _taskSet._tasksNotDone.Select(k => k.projectId == n.projectId).Count() > 0).ToList();
-            projects.DataSource = _taskSet._projects;
+
+            var projectsWithTasks = _taskService._tasksNotDone.Select(n => n.projectId).Distinct();
+
+            projects.DataSource = _taskService._projects.Where(n => projectsWithTasks.Any(z => z == n.projectId)).ToList();
             projects.DisplayMember = "name";
             projects.ValueMember = "projectId";
         }
@@ -83,14 +85,11 @@ namespace NextTask
             SaveElapsedTime();
 
             update_Click(sender, e);
-            _taskSet._currentTask = _taskSet._currentTask.Next;
 
-            if (_taskSet._currentTask == null)
-            {
-                _taskSet._currentTask = _taskSet._tasksNotDone.First;
-            }
+            _taskService.SkipTask();
 
-            LoadForm();
+            description.Text = _taskService._currentTask.Value.description;
+            notes.Text = _taskService._currentTask.Value.notes;
         }
 
 
@@ -98,48 +97,50 @@ namespace NextTask
         {
             SaveElapsedTime();
 
-            _taskSet._currentTask.Value.Completed = DateTime.Now;
+            _taskService._currentTask.Value.Completed = DateTime.Now;
             update_Click(sender, e);
 
             Task clonedTask = new Task();
-            clonedTask.description = _taskSet._currentTask.Value.description;
-            clonedTask.notes = _taskSet._currentTask.Value.notes;
-            clonedTask.id = _taskSet._currentTask.Value.id;
-            clonedTask.TimeSpentInSeconds = _taskSet._currentTask.Value.TimeSpentInSeconds;
-            clonedTask.Created = _taskSet._currentTask.Value.Created;
-            clonedTask.Completed = _taskSet._currentTask.Value.Completed;
+            clonedTask.description = _taskService._currentTask.Value.description;
+            clonedTask.notes = _taskService._currentTask.Value.notes;
+            clonedTask.id = _taskService._currentTask.Value.id;
+            clonedTask.TimeSpentInSeconds = _taskService._currentTask.Value.TimeSpentInSeconds;
+            clonedTask.Created = _taskService._currentTask.Value.Created;
+            clonedTask.Completed = _taskService._currentTask.Value.Completed;
 
-            _taskSet._tasksDone.AddLast(clonedTask);
+            _taskService._tasksDone.AddLast(clonedTask);
 
             LinkedListNode<Task> newCurrentTask = null;
 
-            if (_taskSet._currentTask.Next != null)
+            if (_taskService._currentTask.Next != null)
             {
-                newCurrentTask = _taskSet._currentTask.Next;
-                _taskSet._tasksNotDone.Remove(_taskSet._currentTask);
-                _taskSet._currentTask = newCurrentTask;
+                newCurrentTask = _taskService._currentTask.Next;
+                _taskService._tasksNotDone.Remove(_taskService._currentTask);
+                _taskService._currentTask = newCurrentTask;
             }
-            else if (_taskSet._currentTask.Previous != null)
+            else if (_taskService._currentTask.Previous != null)
             {
-                newCurrentTask = _taskSet._currentTask.Previous;
-                _taskSet._tasksNotDone.Remove(_taskSet._currentTask);
-                _taskSet._currentTask = newCurrentTask;
+                newCurrentTask = _taskService._currentTask.Previous;
+                _taskService._tasksNotDone.Remove(_taskService._currentTask);
+                _taskService._currentTask = newCurrentTask;
             }
             else
             {
-                _taskSet._tasksNotDone.Remove(_taskSet._currentTask);
+                _taskService._tasksNotDone.Remove(_taskService._currentTask);
 
                 ShowFinishedStatus();
             }
 
-            LoadForm();
+            description.Text = _taskService._currentTask.Value.description;
+            notes.Text = _taskService._currentTask.Value.notes;
+
         }
 
         private void update_Click(object sender, EventArgs e)
         {
-            _taskSet._currentTask.Value.description = description.Text;
-            _taskSet._currentTask.Value.notes = notes.Text;
-            TaskRepository.UpdateTask(_taskSet._currentTask.Value);
+            _taskService._currentTask.Value.description = description.Text;
+            _taskService._currentTask.Value.notes = notes.Text;
+            TaskRepository.UpdateTask(_taskService._currentTask.Value);
         }
 
         protected override void OnClosed(EventArgs e)
@@ -172,9 +173,9 @@ namespace NextTask
 
         private void SaveElapsedTime()
         {
-            if (_taskSet._currentTask != null)
+            if (_taskService._currentTask != null)
             {
-                _taskSet._currentTask.Value.TimeSpentInSeconds += (_stopwatch.ElapsedMilliseconds / 1000);
+                _taskService._currentTask.Value.TimeSpentInSeconds += (_stopwatch.ElapsedMilliseconds / 1000);
             }
             _stopwatch.Stop();
             _stopwatch.Reset();
@@ -182,7 +183,12 @@ namespace NextTask
 
         private void projects_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            if (projects.SelectedIndex > 0)
+            {
+                _taskService.SwitchProject(Int32.Parse(projects.SelectedValue.ToString()));
+                description.Text = _taskService._currentTask.Value.description;
+                notes.Text = _taskService._currentTask.Value.notes;
+            }
         }
     }
 }

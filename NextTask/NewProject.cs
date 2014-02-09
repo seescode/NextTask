@@ -12,7 +12,7 @@ namespace NextTask
 {
     public partial class NewProject : Form
     {
-        TaskSet _taskSet = TaskSet.Instance();
+        TaskService _taskService = TaskService.Instance();
 
         public NewProject()
         {
@@ -36,7 +36,7 @@ namespace NextTask
                 Random r = new Random(DateTime.Now.Millisecond + DateTime.Now.Second);
                 p.projectId = r.Next();
 
-                _taskSet._projects.Add(p);
+                _taskService._projects.Add(p);
 
                 projectName.Text = "";
             }

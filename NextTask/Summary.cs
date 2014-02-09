@@ -12,7 +12,7 @@ namespace NextTask
 {
     public partial class Summary : Form
     {
-        TaskSet _taskSet = TaskSet.Instance();
+        TaskService _taskService = TaskService.Instance();
 
         public Summary()
         {
@@ -30,7 +30,7 @@ namespace NextTask
 
             int x = 1;
             long totalTimeInSeconds = 0;
-            foreach (var i in _taskSet._tasksDone)
+            foreach (var i in _taskService._tasksDone)
             {                
                 sb.Append(x + ")" + i.description + " " + Task.GetFormattedTime(i.TimeSpentInSeconds) + Environment.NewLine);
                 x++;
@@ -50,7 +50,7 @@ namespace NextTask
 
             int x = 1;
             long totalTimeInSeconds = 0;
-            foreach (var i in _taskSet._tasksNotDone)
+            foreach (var i in _taskService._tasksNotDone)
             {
                 sb.Append(x + ")" + i.description + " " + Task.GetFormattedTime(i.TimeSpentInSeconds) + Environment.NewLine);
                 x++;

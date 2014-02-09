@@ -45,7 +45,7 @@ namespace NextTask.Data
             notes = "";           
             TimeSpentInSeconds = 0;
             Created = DateTime.Now;
-            projectId = -1;
+            projectId = 1;
         }
 
 
