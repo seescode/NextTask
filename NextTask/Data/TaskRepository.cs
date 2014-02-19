@@ -77,7 +77,7 @@ namespace NextTask.Data
 
         public static SqlCeConnection GetConnection()
         {
-            string con = "Data Source=Database.sdf;Persist Security Info=False;";
+            string con = "Data Source=" + AppDomain.CurrentDomain.BaseDirectory + "Database.sdf;Persist Security Info=False;";
             return new SqlCeConnection(con);
         }
 
