@@ -76,6 +76,8 @@ namespace NextTask
                     t.description = this.description.Text;
                     t.notes = this.notes.Text;
                     t.projectId = Int32.Parse(projects.SelectedValue.ToString());
+
+                    //[FIX]
                     _taskService._tasksNotDone.AddAfter(_taskService._currentTask, t);
                     TaskRepository.InsertTask(t);
                     Clear();

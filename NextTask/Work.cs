@@ -117,23 +117,24 @@ namespace NextTask
                 newCurrentTask = _taskService._currentTask.Next;
                 _taskService._tasksNotDone.Remove(_taskService._currentTask);
                 _taskService._currentTask = newCurrentTask;
+                description.Text = _taskService._currentTask.Value.description;
+                notes.Text = _taskService._currentTask.Value.notes;
             }
             else if (_taskService._currentTask.Previous != null)
             {
                 newCurrentTask = _taskService._currentTask.Previous;
                 _taskService._tasksNotDone.Remove(_taskService._currentTask);
                 _taskService._currentTask = newCurrentTask;
+                description.Text = _taskService._currentTask.Value.description;
+                notes.Text = _taskService._currentTask.Value.notes;
             }
             else
             {
                 _taskService._tasksNotDone.Remove(_taskService._currentTask);
+                _taskService._currentTask = null;
 
                 ShowFinishedStatus();
             }
-
-            description.Text = _taskService._currentTask.Value.description;
-            notes.Text = _taskService._currentTask.Value.notes;
-
         }
 
         private void update_Click(object sender, EventArgs e)
