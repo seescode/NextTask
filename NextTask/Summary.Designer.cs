@@ -35,7 +35,6 @@
             // tasksCompleted
             // 
             this.tasksCompleted.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tasksCompleted.Enabled = false;
             this.tasksCompleted.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tasksCompleted.Location = new System.Drawing.Point(17, 23);
             this.tasksCompleted.Multiline = true;
@@ -47,7 +46,6 @@
             // 
             this.tasksRemaining.BackColor = System.Drawing.SystemColors.Window;
             this.tasksRemaining.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tasksRemaining.Enabled = false;
             this.tasksRemaining.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tasksRemaining.Location = new System.Drawing.Point(17, 385);
             this.tasksRemaining.Multiline = true;
